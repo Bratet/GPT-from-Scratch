@@ -1,61 +1,55 @@
-# GPT-from-scratch
+# GPT Implementation from Scratch
 
-This repository contains a basic implementation of the GPT (Generative Pre-trained Transformer) architecture from scratch using PyTorch. The repository contains both the model implementation and a Jupyter notebook to showcase training and generating text using the implemented model.
+This repository presents a clean and straightforward implementation of GPT (Generative Pre-trained Transformer) from scratch. We make use of the transformer architecture and train it on the "Tiny Shakespeare" dataset.
 
-### Table of Contents
+### Requirements:
 
-1. [Installation](#installation)
-2. [Usage](#usage)
-3. [Repository Structure](#repository-structure)
-4. [License](#license)
+* PyTorch
+* tokenizers
+* tqdm
 
-### Installation
+### Structure:
 
-To use this implementation, ensure you have the following dependencies:
+* `gpt.ipynb`: This is the main notebook where the GPT model is trained and evaluated.
+* `transformer.py`: Contains the transformer model's implementation including multi-head attention, feed-forward layers, positional encodings, and the encoder-decoder layers.
 
-- PyTorch
-- tqdm
-- tokenizers
+### How the code works:
 
-Install the required packages with the following command:
+1. **Preprocessing** :
 
-```bash
-pip install torch tqdm tokenizers
-```
+* We load the data from `input.txt` and tokenize it using Byte Pair Encoding (BPE) tokenizer.
+* Tokens are then converted to numerical indices, creating our dataset.
 
-### Usage
+1. **Model Definition** :
 
-1. Prepare your training data and save it as `input.txt`.
-2. Run the `gpt.ipynb` notebook, which contains the entire training pipeline.
-3. The notebook tokenizes the input text, initializes the GPT model, and starts the training process.
-4. After training, you can generate text using the trained model.
+* A transformer architecture is defined in `transformer.py`.
+* This architecture consists of the standard components like MultiHeadAttention, PositionwiseFeedForward, and PositionalEncoding among others.
 
-### Repository Structure
+1. **Training Loop** :
 
-- `gpt.ipynb`: Jupyter notebook that contains the main code for loading data, training the GPT model, and generating text.
-- `transformer.py`: Contains the implementation of the transformer architecture including MultiHeadAttention, PositionwiseFeedForward, EncoderLayer, DecoderLayer, and the main Transformer model.
+* The data is divided into batches and fed into the transformer.
+* We utilize the Adam optimizer and CrossEntropyLoss criterion for training.
+* Learning rate scheduling with warmup is also implemented.
 
-### Code Overview
+1. **Text Generation** :
 
-- `gpt.ipynb`:
+* After training, the model is used to generate new text based on a given starting point.
 
-  - Loads and tokenizes data using the Byte-Pair Encoding (BPE) tokenizer.
-  - Initializes the GPT model with specified hyperparameters.
-  - Trains the model using a training and validation split.
-  - Generates text using the trained model.
-- `transformer.py`:
+### How to use:
 
-  - Contains the implementation of the various components of the Transformer architecture.
-  - `MultiHeadAttention`: Implements the multi-head self-attention mechanism.
-  - `PositionwiseFeedForward`: Implements the position-wise feed-forward networks.
-  - `EncoderLayer` & `DecoderLayer`: Basic blocks of the encoder and decoder stacks.
-  - `PositionalEncoding`: Adds the positional encodings to the input embeddings.
-  - `Transformer`: Main model which combines the above components to create the Transformer architecture.
+1. Make sure you have all the required libraries installed.
+2. Run the `gpt.ipynb` notebook to train and evaluate the GPT model.
+3. The model will train on the provided data and generate text in the end.
 
-### License
+### Notes:
 
-This project is open-source and available to everyone. Before using or contributing to the project, make sure to familiarize yourself with the [LICENSE](./LICENSE) file.
+* Make sure to adjust the hyperparameters as per your computational resources and dataset size.
+* For best results, consider using a GPU for training.
 
 ---
 
-Feel free to contribute to this project by raising issues or submitting pull requests. Feedback and contributions are always welcome.
+Thank you for checking out this repository. Contributions are welcome!
+
+---
+
+Made with ❤️ by Bratet
